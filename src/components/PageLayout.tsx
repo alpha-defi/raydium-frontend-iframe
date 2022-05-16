@@ -6,11 +6,15 @@ import { ZERO } from '@raydium-io/raydium-sdk'
 import { twMerge } from 'tailwind-merge'
 
 import useAppSettings from '@/application/appSettings/useAppSettings'
+import { refreshWindow } from '@/application/appVersion/forceWindowRefresh'
+import { useAppVersion } from '@/application/appVersion/useAppVersion'
 import useConnection from '@/application/connection/useConnection'
 import useNotification from '@/application/notification/useNotification'
 import useWallet from '@/application/wallet/useWallet'
+import { setCssVarible } from '@/functions/dom/cssVariable'
 import jFetch from '@/functions/dom/jFetch'
 import linkTo from '@/functions/dom/linkTo'
+import { inClient } from '@/functions/judgers/isSSR'
 import { eq } from '@/functions/numberish/compare'
 import { div, mul } from '@/functions/numberish/operations'
 import { toString } from '@/functions/numberish/toString'
@@ -21,7 +25,9 @@ import { LinkAddress } from '@/types/constants'
 
 import { Badge } from './Badge'
 import Button from './Button'
+import Card from './Card'
 import Col from './Col'
+import Dialog from './Dialog'
 import Drawer from './Drawer'
 import { FadeIn } from './FadeIn'
 import Grid from './Grid'
@@ -29,18 +35,12 @@ import Icon, { AppHeroIconName } from './Icon'
 import Image from './Image'
 import Input from './Input'
 import Link from './Link'
+import LoadingCircle from './LoadingCircle'
 import MessageBoardWidget from './navWidgets/MessageBoardWidget'
 import WalletWidget from './navWidgets/WalletWidget'
 import PageLayoutPopoverDrawer from './PageLayoutPopoverDrawer'
 import Row from './Row'
 import Tooltip from './Tooltip'
-import LoadingCircle from './LoadingCircle'
-import { setCssVarible } from '@/functions/dom/cssVariable'
-import { inClient } from '@/functions/judgers/isSSR'
-import { useAppVersion } from '@/application/appVersion/useAppVersion'
-import { refreshWindow } from '@/application/appVersion/forceWindowRefresh'
-import Card from './Card'
-import Dialog from './Dialog'
 
 /**
  * for easier to code and read
@@ -109,7 +109,7 @@ export default function PageLayout(props: {
       <main
         // always occupy scrollbar space
         className={twMerge(
-          `PageLayoutContent relative isolate flex-container grid-area-c bg-gradient-to-b from-[#0c0927] to-[#110d36] rounded-tl-3xl mobile:rounded-none p-12 ${
+          `PageLayoutContent overflow-auto relative isolate flex-container grid-area-c bg-gradient-to-b from-[#0c0927] to-[#110d36] rounded-tl-3xl mobile:rounded-none p-12 ${
             props.contentIsFixedLength ? 'pb-4' : ''
           } mobile:py-2 mobile:px-3`,
           props.contentClassName
