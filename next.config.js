@@ -19,6 +19,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 const withGlobalCssConfig = require('next-global-css').withGlobalCss()
 
+// For now, allow very open security headers
+const securityHeaders = [
+  {
+    key: 'Content-Security-Policy',
+    value: 'default-src *'
+  }
+]
+
 const moduleExports = {
   trailingSlash: true,
 
@@ -32,6 +40,15 @@ const moduleExports = {
     // locales: ['en-US', 'zh-CN'],
     locales: ['en-US'],
     defaultLocale: 'en-US'
+  },
+  async headers() {
+    return [
+      {
+        // Apply these headers to all routes in your application.
+        source: '/(.*)',
+        headers: securityHeaders
+      }
+    ]
   },
   async redirects() {
     return [
