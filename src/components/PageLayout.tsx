@@ -109,15 +109,13 @@ export default function PageLayout(props: {
       <main
         // always occupy scrollbar space
         className={twMerge(
-          `PageLayoutContent overflow-auto relative isolate flex-container grid-area-c bg-gradient-to-b from-[#0c0927] to-[#110d36] rounded-tl-3xl mobile:rounded-none p-12 ${
+          `PageLayoutContent relative isolate flex-container grid-area-c bg-gradient-to-b from-[#0c0927] to-[#110d36] rounded-tl-3xl mobile:rounded-none p-12  overflow-auto ${
             props.contentIsFixedLength ? 'pb-4' : ''
           } mobile:py-2 mobile:px-3`,
           props.contentClassName
         )}
         style={{
-          contentVisibility: 'auto',
-          overflowX: 'hidden',
-          overflowY: 'scroll'
+          contentVisibility: 'auto'
         }}
       >
         {/* do not check ata currently
