@@ -15,8 +15,10 @@ import Row from '@/components/Row'
 import Tooltip from '@/components/Tooltip'
 import linkTo from '@/functions/dom/linkTo'
 import useDevice from '@/hooks/useDevice'
-import { useDocumentScrollDetector } from '@/hooks/useScrollDetector'
 import useDocumentMetaTitle from '@/hooks/useDocumentMetaTitle'
+import { useDocumentScrollDetector } from '@/hooks/useScrollDetector'
+
+import Swap from './swap'
 
 function HomePageContainer({ children }: { children?: ReactNode }) {
   useDocumentScrollDetector()
@@ -577,14 +579,6 @@ function HomePageFooter() {
 }
 
 export default function HomePage() {
-  return (
-    <HomePageContainer>
-      <HomePageNavbar />
-      <HomePageSection0 />
-      <HomePageSection1 />
-      <HomePageSection2 />
-      <HomePageSection3 />
-      <HomePageFooter />
-    </HomePageContainer>
-  )
+  // Go straight to Swap component, ignore homepage
+  return <Swap></Swap>
 }
