@@ -47,7 +47,7 @@ const moduleExports = {
     defaultLocale: 'en-US'
   },
   async headers() {
-    return [{ source: '/(.*)', headers: createSecureHeaders() }]
+    return [{ source: '/(.*)', headers: securityHeaders }]
   },
   async redirects() {
     return [
