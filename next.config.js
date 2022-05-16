@@ -1,4 +1,5 @@
 const nextBuildId = require('next-build-id')
+const { createSecureHeaders } = require('next-secure-headers')
 
 const sentryWebpackPluginOptions = {
   // Additional config options for the Sentry Webpack plugin. Keep in mind that
@@ -46,13 +47,7 @@ const moduleExports = {
     defaultLocale: 'en-US'
   },
   async headers() {
-    return [
-      {
-        // Apply these headers to all routes in your application.
-        source: '/(.*)',
-        headers: securityHeaders
-      }
-    ]
+    return [{ source: '/(.*)', headers: createSecureHeaders() }]
   },
   async redirects() {
     return [
@@ -60,16 +55,6 @@ const moduleExports = {
         source: '/liquidity',
         destination: '/liquidity/add',
         permanent: true
-      },
-      {
-        source: '/acceleRaytor',
-        destination: 'https://v1.raydium.io/acceleRaytor',
-        permanent: false
-      },
-      {
-        source: '/acceleraytor',
-        destination: 'https://v1.raydium.io/acceleRaytor',
-        permanent: false
       }
     ]
   }
