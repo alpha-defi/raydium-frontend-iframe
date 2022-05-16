@@ -24,6 +24,10 @@ const securityHeaders = [
   {
     key: 'Content-Security-Policy',
     value: 'default-src *'
+  },
+  {
+    key: 'X-Frame-Options',
+    value: 'SAMEORIGIN'
   }
 ]
 
